@@ -457,7 +457,43 @@ $("cameraStartBtn").onclick = confirmCamera;
 $("cameraCancelBtn").onclick = cancelCamera;
 document.querySelectorAll("[data-back]").forEach(b => b.addEventListener("click", goBack));
 
-$("apiBridge").src = API_URL + "?bridge=1";
+const bridge =
+  $("apiBridge");
+
+bridge.src =
+  API_URL + "?bridge=1";
+
+bridge.onload = function() {
+
+  console.log(
+    "Bridge Apps Script berhasil dimuat."
+  );
+
+};
+setTimeout(async function() {
+
+  try {
+
+    const result =
+      await callApi("ping");
+
+    console.log(
+      "PING BERHASIL:",
+      result
+    );
+
+  }
+
+  catch(error) {
+
+    console.error(
+      "PING GAGAL:",
+      error
+    );
+
+  }
+
+}, 3000);
 
 window.addEventListener("load", () => {
   history.replaceState({page:"dashboardPage"}, "", "#dashboardPage");
